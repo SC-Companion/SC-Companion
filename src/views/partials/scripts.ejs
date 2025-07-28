@@ -1,0 +1,112 @@
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Custom Scripts -->
+<script>
+  // Initialisation globale
+  document.addEventListener("DOMContentLoaded", function () {
+    // Vérifier si on est sur la page de connexion ou dashboard
+    const isLoginPage =
+      window.location.href.includes("login") ||
+      document.getElementById("loginForm");
+    const isDashboardPage = document.querySelector(".sidebar");
+
+    if (isLoginPage) {
+      // Scripts spécifiques à la page de connexion
+      console.log("Page de connexion détectée");
+    } else if (isDashboardPage) {
+      // Scripts spécifiques au dashboard
+      console.log("Dashboard détecté");
+
+      // Initialisation des graphiques si Chart.js est disponible
+      if (typeof Chart !== "undefined") {
+        const ctx = document.getElementById("salesChart");
+        if (ctx) {
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin"],
+              datasets: [
+                {
+                  label: "Ventes",
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderColor: "#f97316",
+                  backgroundColor: "rgba(249, 115, 22, 0.1)",
+                  tension: 0.4,
+                  borderWidth: 2,
+                  pointBackgroundColor: "#f97316",
+                  pointBorderColor: "#ffffff",
+                  pointBorderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "top",
+                  labels: {
+                    color: "#e2e8f0",
+                    font: {
+                      size: 12,
+                    },
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  ticks: {
+                    color: "#94a3b8",
+                  },
+                  grid: {
+                    color: "rgba(148, 163, 184, 0.1)",
+                  },
+                },
+                y: {
+                  ticks: {
+                    color: "#94a3b8",
+                  },
+                  grid: {
+                    color: "rgba(148, 163, 184, 0.1)",
+                  },
+                },
+              },
+            },
+          });
+        }
+      }
+
+      // Gestion du mode sombre/clair
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener("click", () => {
+          document.documentElement.classList.toggle("dark");
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("darkMode", JSON.stringify(isDark));
+        });
+      }
+
+      // Gestion des notifications
+      window.dashboardUtils = {
+        showNotification: function (message, type = "info") {
+          const notification = document.createElement("div");
+          notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+            type === "success"
+              ? "bg-green-500 text-white"
+              : type === "error"
+              ? "bg-red-500 text-white"
+              : "bg-blue-500 text-white"
+          }`;
+          notification.textContent = message;
+
+          document.body.appendChild(notification);
+
+          setTimeout(() => {
+            notification.remove();
+          }, 3000);
+        },
+      };
+    }
+  });
+</script>

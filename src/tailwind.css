@@ -1,0 +1,639 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== LIQUID GLASS DESIGN SYSTEM ===== */
+
+/* CSS Variables for RSI/Star Citizen Liquid Glass Theme */
+:root {
+  --sc-primary: #3b82f6;
+  --sc-primary-glow: #60a5fa;
+  --sc-dark: #0f172a;
+  --sc-darker: #020617;
+  --sc-accent: #f97316;
+  --sc-accent-glow: #fb923c;
+  --sc-accent-dark: #ea580c;
+  --sc-text: #e2e8f0;
+  --sc-text-secondary: #94a3b8;
+  --sc-border: rgba(59, 130, 246, 0.3);
+  --sc-glass: rgba(15, 23, 42, 0.8);
+  --sc-glass-light: rgba(30, 41, 59, 0.6);
+  --sc-glass-dark: rgba(2, 6, 23, 0.9);
+  --sc-glow-blue: rgba(59, 130, 246, 0.2);
+  --sc-glow-orange: rgba(249, 115, 22, 0.2);
+  --sc-glow-purple: rgba(168, 85, 247, 0.2);
+}
+
+/* Base styles with liquid glass background */
+body {
+  background: linear-gradient(
+    135deg,
+    var(--sc-darker) 0%,
+    #0f172a 25%,
+    #1e293b 50%,
+    #334155 75%,
+    #475569 100%
+  );
+  background-size: 400% 400%;
+  animation: liquidBackground 20s ease-in-out infinite;
+  color: var(--sc-text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Liquid background animation */
+@keyframes liquidBackground {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ===== LIQUID GLASS EFFECTS ===== */
+
+/* Enhanced Glass Effect with liquid properties */
+.liquid-glass {
+  /* Fallback for browsers that don't support backdrop-filter */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.8) 0%,
+    rgba(30, 41, 59, 0.7) 25%,
+    rgba(51, 65, 85, 0.6) 50%,
+    rgba(71, 85, 105, 0.7) 75%,
+    rgba(15, 23, 42, 0.8) 100%
+  ) !important;
+
+  /* Modern browsers with backdrop-filter support */
+  -webkit-backdrop-filter: blur(25px) saturate(200%) !important;
+  backdrop-filter: blur(25px) saturate(200%) !important;
+
+  /* Override background for modern browsers */
+  @supports (backdrop-filter: blur(1px)) {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.4) 0%,
+      rgba(30, 41, 59, 0.3) 25%,
+      rgba(51, 65, 85, 0.2) 50%,
+      rgba(71, 85, 105, 0.3) 75%,
+      rgba(15, 23, 42, 0.4) 100%
+    ) !important;
+  }
+
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.2),
+    0 0 20px rgba(249, 115, 22, 0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  animation: liquidGlassGlow 4s ease-in-out infinite !important;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.liquid-glass:hover::before {
+  left: 100%;
+}
+
+@keyframes liquidGlassGlow {
+  0%,
+  100% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.2),
+      0 0 20px rgba(249, 115, 22, 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.3),
+      0 0 30px rgba(249, 115, 22, 0.3), 0 0 50px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Enhanced gradient background with liquid animation */
+.gradient-bg {
+  background: linear-gradient(
+    135deg,
+    #0a0e1a 0%,
+    #1a2332 25%,
+    #2d3748 50%,
+    #4a5568 75%,
+    #718096 100%
+  ) !important;
+  background-size: 400% 400% !important;
+  animation: liquidGradient 15s ease-in-out infinite !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.gradient-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(59, 130, 246, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(249, 115, 22, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(168, 85, 247, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 60%,
+      rgba(34, 197, 94, 0.1) 0%,
+      transparent 50%
+    );
+  animation: liquidOverlay 10s ease-in-out infinite;
+}
+
+@keyframes liquidGradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes liquidOverlay {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* ===== ENHANCED INPUT EFFECTS ===== */
+
+/* Liquid input focus effects */
+.input-focus {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.8) 0%,
+    rgba(51, 65, 85, 0.6) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.input-focus:focus {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(249, 115, 22, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: #f97316;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.9) 0%,
+    rgba(51, 65, 85, 0.8) 100%
+  );
+}
+
+/* ===== ENHANCED BUTTON EFFECTS ===== */
+
+/* Liquid SC Button with advanced animations */
+.sc-button {
+  background: linear-gradient(
+    135deg,
+    #f97316 0%,
+    #ea580c 25%,
+    #dc2626 50%,
+    #ea580c 75%,
+    #f97316 100%
+  );
+  background-size: 200% 200%;
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sc-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.sc-button:hover {
+  background-position: 100% 100%;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.4),
+    0 0 0 1px rgba(249, 115, 22, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.sc-button:hover::before {
+  left: 100%;
+}
+
+@keyframes buttonGlow {
+  0%,
+  100% {
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.6),
+      0 0 20px rgba(249, 115, 22, 0.3);
+  }
+}
+
+/* ===== ENHANCED CARD EFFECTS ===== */
+
+/* Liquid SC Card with advanced glass morphism */
+.sc-card {
+  background: linear-gradient(
+    135deg,
+    rgba(2, 6, 23, 0.8) 0%,
+    rgba(15, 23, 42, 0.6) 50%,
+    rgba(30, 41, 59, 0.4) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.05) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sc-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.sc-card:hover::before {
+  opacity: 1;
+}
+
+/* ===== ENHANCED SIDEBAR EFFECTS ===== */
+
+/* Liquid Sidebar with advanced styling */
+.sidebar {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(2, 6, 23, 0.9) 100%
+  );
+  border-right: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3),
+    inset 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced menu item effects */
+.menu-item-inactive {
+  color: rgb(203 213 225);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-inactive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.menu-item-inactive:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.8) 0%,
+    rgba(51, 65, 85, 0.6) 100%
+  );
+  color: white;
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.menu-item-inactive:hover::before {
+  left: 100%;
+}
+
+.menu-item-active {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
+  background-size: 200% 200%;
+  color: white;
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: activeGlow 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: activeShine 2s ease-in-out infinite;
+}
+
+@keyframes activeGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.6),
+      0 0 15px rgba(249, 115, 22, 0.3);
+  }
+}
+
+@keyframes activeShine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.menu-item-icon-inactive {
+  color: rgb(148 163 184);
+  transition: all 0.3s ease;
+}
+
+.menu-item-icon-active {
+  color: white;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ===== ENHANCED SCROLLBAR ===== */
+
+/* Liquid scrollbar with glow effects */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.3) 0%,
+    rgba(30, 41, 59, 0.2) 100%
+  );
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 0.8) 0%,
+    rgba(234, 88, 12, 0.6) 100%
+  );
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 1) 0%,
+    rgba(234, 88, 12, 0.8) 100%
+  );
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+  transform: scaleX(1.2);
+}
+
+/* Firefox scrollbar */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 115, 22, 0.8) rgba(15, 23, 42, 0.3);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Enhanced gradient backgrounds */
+.bg-gradient-sc {
+  background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+.bg-gradient-sc-reverse {
+  background: linear-gradient(135deg, #f97316 0%, #3b82f6 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease-in-out infinite reverse;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced glass morphism */
+.glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.8) 0%,
+    rgba(30, 41, 59, 0.6) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3),
+    0 0 0 1px rgba(249, 115, 22, 0.2);
+}
+
+/* Enhanced focus states */
+.focus-sc {
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.focus-sc:focus {
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3),
+    0 0 20px rgba(249, 115, 22, 0.2);
+  transform: scale(1.02);
+}
+
+/* Enhanced transitions */
+.transition-sc {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== ANIMATION UTILITIES ===== */
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glow pulse animation */
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+  }
+}
+
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+
+.dark .sc-card {
+  background: linear-gradient(
+    135deg,
+    rgba(2, 6, 23, 0.9) 0%,
+    rgba(15, 23, 42, 0.7) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+/* ===== RESPONSIVE LIQUID EFFECTS ===== */
+
+@media (max-width: 768px) {
+  .liquid-glass {
+    backdrop-filter: blur(15px) saturate(150%);
+  }
+
+  .sc-card {
+    backdrop-filter: blur(15px) saturate(150%);
+  }
+}
+
+/* ===== SC TEXT COLORS ===== */
+
+.sc-text {
+  color: #e2e8f0;
+}
+
+.sc-text-secondary {
+  color: #94a3b8;
+}
+
+.sc-accent {
+  color: #f97316;
+}
+
+.sc-border {
+  border-color: rgba(59, 130, 246, 0.3);
+}
