@@ -1,170 +1,77 @@
-# 🌌 SC Companion
+# SC Companion - Desktop Application
 
-**SC Companion** est une application compagnon pour Star Citizen qui enrichit l'expérience de jeu avec des fonctionnalités sociales, communautaires et analytiques.
+Application desktop officielle de SC Companion pour Star Citizen.
 
 ## 🚀 Fonctionnalités
 
-### Version 0.0.1 (Actuelle)
-- **Réseau social complet** : Posts, likes, follows, amis
-- **Système de progression** : XP et niveaux calculés dynamiquement
-- **Intégration RSI** : Liaison avec votre compte Star Citizen
-- **Système de rôles** : User, Moderator, Admin, Super Admin
-- **API REST complète** avec authentification JWT
-- **Architecture modulaire** prête pour les extensions
-
-### Fonctionnalités futures
-- **Quêtes communautaires** basées sur les logs du jeu
-- **Marketplace interne** (monnaie fictive uniquement)
-- **Monitoring des performances PC**
-- **Upload média** (images/vidéos)
-- **Modèle freemium/premium**
-
-## 🏗️ Architecture
-
-Ce projet utilise une architecture monorepo avec les composants suivants :
-
-```
-sc-companion/
-├── apps/
-│   ├── desktop/          # Application Electron + React
-│   ├── web-dashboard/    # Dashboard web React + Vite
-│   └── landing/          # Page vitrine
-├── services/
-│   └── api/              # API Backend Node.js + Express + Knex
-├── packages/
-│   ├── shared/           # Types et schémas partagés
-│   └── sdk/              # Client SDK TypeScript
-└── docs/                 # Documentation
-```
-
-## 🛠️ Technologies
-
-### Backend
-- **Node.js** + **Express** + **TypeScript**
-- **Knex.js** pour les requêtes base de données
-- **SQLite** (dev) / **PostgreSQL** (prod)
-- **Zod** pour la validation
-- **JWT** pour l'authentification
-- **bcrypt** pour le hashage des mots de passe
-
-### Frontend (à venir)
-- **Electron** + **React** pour l'app desktop
-- **React** + **Vite** pour le dashboard web
-- **Tailwind CSS** + **shadcn/ui** + **daisyUI**
-
-### DevOps
-- **TypeScript** partout
-- **Workspaces npm** pour le monorepo
-- **Knex migrations** et seeds
-- Architecture Clean avec Repository Pattern
+- **Réseau Social** : Posts, follow, amis, likes
+- **Interface moderne** : React + Tailwind + shadcn/ui + daisyUI
+- **Auto-update** : Système de mise à jour automatique Discord-style
+- **API intégrée** : Serveur embarqué pour les données
+- **Cross-platform** : Windows, macOS, Linux
 
 ## 📦 Installation
 
 ### Prérequis
-- Node.js >= 18
-- npm >= 9
+- Node.js 18+
+- npm ou yarn
 
-### Installation
+### Développement
 ```bash
-# Cloner le repo
-git clone <repo-url>
-cd SC-Companion
-
 # Installer les dépendances
 npm install
 
-# Configurer l'environnement
-cd services/api
-cp .env.example .env
-# Éditer .env avec vos paramètres
-
-# Lancer les migrations
-npm run migrate
-
-# Optionnel : Lancer les seeds pour des données de test
-npm run seed
-```
-
-## 🚀 Lancement
-
-### API Backend
-```bash
-# Mode développement
+# Lancer en mode développement
 npm run dev
-
-# Production
-npm run build
-npm start
 ```
 
-### Tests et Linting
+### Build
 ```bash
-# Tests
-npm test
+# Build l'application
+npm run build
 
-# Linting
-npm run lint
-
-# Type checking
-npm run typecheck
+# Créer l'installeur
+npm run build:installer
 ```
 
-## 📊 Base de données
+## 🛠️ Scripts disponibles
 
-### Schema principal
-- **users** : Utilisateurs avec données RSI intégrées
-- **posts** : Publications avec support média
-- **follows** : Relations de suivi asymétriques
-- **friends** : Relations d'amitié bidirectionnelles
-- **likes** : Système de likes sur les posts
+- `npm run dev` - Mode développement avec hot reload
+- `npm run build` - Build de production
+- `npm run build:installer` - Créer l'installeur (Windows/Mac/Linux)
+- `npm run typecheck` - Vérification TypeScript
+- `npm run lint` - Linter ESLint
 
-### Système XP/Niveaux
-- XP stocké, niveau calculé dynamiquement
-- Formule : `level = floor(sqrt(xp / 100)) + 1`
-- XP gagné via posts, likes reçus, follows, etc.
+## 🏗️ Architecture
 
-### Rôles et permissions
-- **User** : Actions de base
-- **Moderator** : Modération posts/utilisateurs
-- **Admin** : Gestion utilisateurs, quêtes, événements
-- **Super Admin** : Accès système complet
+```
+src/
+├── components/          # Composants React
+│   ├── layout/         # Layouts (Sidebar, TopBar, etc.)
+│   └── ui/             # Composants UI réutilisables
+├── pages/              # Pages de l'application
+├── store/              # État global (Zustand)
+├── lib/                # Utilitaires et API client
+└── types/              # Types TypeScript
 
-## 🔧 Développement
+electron/
+├── main.ts             # Process principal Electron
+├── preload.ts          # Script de préchargement
+└── embedded-server.ts  # Serveur API embarqué
+```
 
-### Structure des commits
-- feat: nouvelle fonctionnalité
-- fix: correction de bug
-- docs: documentation
-- style: formatage/style
-- refactor: refactoring
-- test: ajout/correction tests
-- chore: maintenance
+## 🔄 Auto-update
 
-### Règles de code
-- TypeScript strict mode
-- Controllers minces → logique dans services
-- Repositories pour l'accès DB
-- Validation Zod systématique
-- Gestion d'erreurs centralisée
+L'application utilise `electron-updater` pour les mises à jour automatiques :
+- Vérification au démarrage
+- Interface Discord-style avec bouton "Redémarrer et mettre à jour"
+- Téléchargement contrôlé par l'utilisateur
 
 ## 🤝 Contribution
 
-1. Fork le projet
-2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
-3. Commit les changes (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+Ce repository contient uniquement le code client de l'application desktop. 
+Les APIs et services backend sont dans des repositories séparés pour des raisons de sécurité.
 
-## 📝 License
+## 📄 License
 
-Ce projet est sous licence MIT. Voir `LICENSE` pour plus de détails.
-
-## 🌟 Remerciements
-
-- La communauté Star Citizen
-- L'équipe CIG pour cet univers incroyable
-- Tous les contributeurs du projet
-
----
-
-**Fly safe, citizen! o7**
+Propriétaire - SC Companion Team
