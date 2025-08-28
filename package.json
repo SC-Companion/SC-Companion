@@ -15,7 +15,9 @@
     "build:installer": "npm run build && electron-builder",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
   },
   "build": {
     "appId": "com.sc-companion.desktop",
@@ -72,6 +74,9 @@
     "zustand": "^4.4.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.4",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -87,6 +92,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.0",
     "postcss": "^8.4.0",
+    "semantic-release": "^24.2.7",
     "tailwindcss": "^3.3.0",
     "tailwindcss-animate": "^1.0.0",
     "typescript": "^5.0.2",
