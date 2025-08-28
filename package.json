@@ -1,0 +1,39 @@
+{
+  "name": "sc-companion",
+  "version": "0.0.1",
+  "description": "SC Companion - Application compagnon pour Star Citizen",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "dev": "npm run dev --workspace=services/api",
+    "dev:desktop": "npm run dev --workspace=apps/desktop",
+    "dev:web": "npm run dev --workspace=apps/web-dashboard",
+    "dev:landing": "npm run dev --workspace=apps/landing",
+    "build": "npm run build --workspaces",
+    "build:api": "npm run build --workspace=services/api",
+    "build:desktop": "npm run build --workspace=apps/desktop",
+    "build:web": "npm run build --workspace=apps/web-dashboard",
+    "build:landing": "npm run build --workspace=apps/landing",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "migrate": "npm run migrate --workspace=services/api",
+    "seed": "npm run seed --workspace=services/api"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "7zip-bin": "^5.2.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
