@@ -29,7 +29,7 @@
     "publish": {
       "provider": "github",
       "owner": "SC-Companion",
-      "repo": "sc-companion"
+      "repo": "SC-Companion"
     },
     "files": [
       "dist/**/*",
@@ -61,10 +61,7 @@
   "dependencies": {
     "axios": "^1.6.0",
     "clsx": "^2.0.0",
-    "cors": "^2.8.5",
     "electron-updater": "^6.1.0",
-    "express": "^4.21.2",
-    "helmet": "^7.2.0",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -75,8 +72,6 @@
     "zustand": "^4.4.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^4.17.23",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

@@ -2,19 +2,16 @@ import { app, BrowserWindow, Menu, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import fs from 'fs';
-import { EmbeddedServer } from './embedded-server';
 
 // Configuration
 const isDev = process.env.NODE_ENV === 'development';
 const isWin = process.platform === 'win32';
+const API_BASE_URL = isDev ? 'http://localhost:3001' : 'https://api.sc-companion.com';
 
 class SCCompanionApp {
   private mainWindow: BrowserWindow | null = null;
-  private embeddedServer: EmbeddedServer;
-  private serverPort: number = 0;
 
   constructor() {
-    this.embeddedServer = new EmbeddedServer();
     this.setupApp();
   }
 
@@ -22,10 +19,6 @@ class SCCompanionApp {
     // App event handlers
     app.whenReady().then(async () => {
       try {
-        // Démarrer le serveur embarqué
-        this.serverPort = await this.embeddedServer.start();
-        console.log(`✅ Serveur API embarqué démarré sur le port ${this.serverPort}`);
-        
         await this.createMainWindow();
         this.setupMenu();
         this.setupAutoUpdater();
@@ -36,9 +29,6 @@ class SCCompanionApp {
     });
 
     app.on('window-all-closed', async () => {
-      // Arrêter le serveur embarqué
-      await this.embeddedServer.stop();
-      
       if (!isWin) {
         app.quit();
       }
@@ -230,7 +220,7 @@ class SCCompanionApp {
   private setupIPC(): void {
     // API Server URL
     ipcMain.handle('get-api-url', async () => {
-      return this.embeddedServer.getBaseUrl();
+      return API_BASE_URL;
     });
 
     // Game log monitoring (future feature)
@@ -245,7 +235,7 @@ class SCCompanionApp {
         platform: process.platform,
         arch: process.arch,
         version: app.getVersion(),
-        apiUrl: this.embeddedServer.getBaseUrl(),
+        apiUrl: API_BASE_URL,
       };
     });
 
